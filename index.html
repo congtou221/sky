@@ -1,1 +1,64 @@
-Hello github pages
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+	</body>
+	<script>
+		var canvas = document.getElementById("canvas")
+		
+		canvas.width = 1200;
+		canvas.height = 800;
+		
+		var context = canvas.getContext("2d");
+		
+		var skyColor = context.createRadialGradient(canvas.width*0.5,canvas.height,0,canvas.width*0.5,canvas.height,canvas.width*0.5);
+		skyColor.addColorStop(0.0,"#035");
+		skyColor.addColorStop(1.0,"black");
+		
+		context.fillStyle = skyColor;
+		context.fillRect(0,0,canvas.width,canvas.height);
+		
+		for(var i=0;i<200;i++){
+			r=Math.random()*5+5;
+			x=Math.random()*canvas.width;
+			y=Math.random()*canvas.height*0.65;
+			a=Math.random()*360;
+			
+			strokeStar(r,x,y,a);
+		}
+
+		function strokeStar(r,x,y,rot){
+			context.save();
+			
+			context.translate(x,y);
+			context.rotate(rot/180*Math.PI);
+			context.scale(r,r);
+			
+			pathStar();
+			
+			context.fillStyle="yellow";
+		//	context.strokeStyle="lightyellow";
+		//	context.lineWidth=2;
+		//	context.lineJoin="round";
+			
+			context.fill();
+		//	context.stroke();
+			
+			context.restore();
+		}
+		
+		function pathStar(){
+			context.beginPath();
+			for(var i=0;i<5;i++){
+				context.lineTo(Math.cos((18+i*72)/180*Math.PI),-Math.sin((18+i*72)/180*Math.PI));
+				context.lineTo(Math.cos((54+i*72)/180*Math.PI)*0.5,-Math.sin((54+i*72)/180*Math.PI)*0.5);
+			}
+			context.closePath();	
+		
+		}
+	</script>
+</html>
