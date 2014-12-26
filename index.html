@@ -33,7 +33,22 @@
 		
 		drawMoon(context,800,200,2,100,0);
 		
+		context.beginPath();
+		context.moveTo(0,600);
+		context.bezierCurveTo(540,400,700,800,1200,600);
+		context.lineTo(1200,800);
+		context.lineTo(0,800);
+		context.closePath();
+		
+		var linearGrad = context.createLinearGradient(0,0,0,800);
+		linearGrad.addColorStop(0.0,'#580');
+		linearGrad.addColorStop(1.0,'#030');
+		context.fillStyle = linearGrad;
+		
+		context.fill();
+		
 		function drawMoon(cxt,x,y,d,r,rot,fillColor){
+			
 			cxt.save();
 			
 			cxt.rotate(rot/180*Math.PI);
