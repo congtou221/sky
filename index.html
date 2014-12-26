@@ -30,7 +30,39 @@
 			
 			strokeStar(r,x,y,a);
 		}
-
+		
+		drawMoon(context,800,200,2,100,0);
+		
+		function drawMoon(cxt,x,y,d,r,rot,fillColor){
+			cxt.save();
+			
+			cxt.rotate(rot/180*Math.PI);
+			cxt.translate(x,y);
+			cxt.scale(r,r);
+			
+			pathMoon(cxt,d);
+			
+			
+			cxt.fillStyle = fillColor ||"#fb5";
+			cxt.fill();
+			
+			cxt.restore();
+		}
+		
+		function pathMoon(cxt,d){
+			cxt.beginPath();
+			
+			cxt.arc(0,0,1,0.5*Math.PI,1.5*Math.PI,true);
+			cxt.moveTo(0,-1);
+			cxt.arcTo(d,0,0,1,dis(0,1,d,0)/d);
+			
+			cxt.closePath();
+		}
+		
+		function dis(x1,y1,x2,y2){
+			return Math.sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+		}
+		
 		function strokeStar(r,x,y,rot){
 			context.save();
 			
@@ -40,7 +72,7 @@
 			
 			pathStar();
 			
-			context.fillStyle="yellow";
+			context.fillStyle="#fb5";
 		//	context.strokeStyle="lightyellow";
 		//	context.lineWidth=2;
 		//	context.lineJoin="round";
